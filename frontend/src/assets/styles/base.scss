@@ -1,0 +1,42 @@
+@use "./use.scss";
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img,
+picture,
+svg,
+video {
+  max-width: 100%;
+  display: block;
+}
+
+html {
+  color-scheme: dark light;
+}
+
+input,
+button,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+// typography
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: use.$text-heading;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  line-height: 1.3;
+}

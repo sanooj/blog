@@ -1,0 +1,14 @@
+@use "../../../assets/styles/use";
+
+:root {
+  --badge-bg-color: #e9edf0;
+  --badge-color: #44566c;
+}
+.badge {
+  @include use.font-size(13);
+  font-weight: 300;
+  border-radius: 20px;
+  padding: 6px 12px;
+  background-color: var(--badge-bg-color);
+  color: var(--badge-color);
+}

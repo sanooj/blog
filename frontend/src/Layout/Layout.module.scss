@@ -1,0 +1,29 @@
+@use "../assets/styles/use";
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  padding: 30px;
+}
+
+.section-wrapper {
+  max-width: 1030px;
+  width: calc(100% - 60px);
+  height: calc(100% - 60px);
+  border-radius: 30px;
+  box-shadow: use.$default-box-shadow;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: 70px 1fr 70px;
+  grid-template-areas: "header header" "sidebar main" "sidebar footer";
+}
+
+.content {
+  grid-area: main;
+  background-color: #fff;
+}

@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap");
+
+// global variables
+:root {
+  --body-bg-color: #f0f0f6;
+  --body-text-color: #5f6f81;
+  --body-font-family: "Inter", sans-serif;
+  --body-font-size: 1.5rem;
+  --body-line-height: 1.65rem;
+  --body-font-weight: 400;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background: var(--body-bg-color);
+  color: var(--body-text-color);
+  overflow-x: hidden;
+  line-height: var(--body-line-height);
+  font: {
+    family: var(--body-font-family);
+    size: var(--body-font-size);
+    weight: var(--body-font-weight);
+  }
+
+  &:before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url(./assets/images/body-bg.png) no-repeat center center fixed;
+    background-size: 120% 120%;
+  }
+}

@@ -1,2 +1,2 @@
 # blog
-An MERN stack-based blog
+A MERN stack-based blog

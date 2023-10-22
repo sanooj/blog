@@ -1,5 +1,5 @@
 import React, { SyntheticEvent } from "react";
-import useCreateBlogMutation from "../api/dataFetchingHooks/mutation/useCreateBlogMutation";
+import useCreateBlogMutation from "../../api/dataFetchingHooks/mutation/useCreateBlogMutation";
 
 const CreateBlog = () => {
   const createBlog = useCreateBlogMutation();

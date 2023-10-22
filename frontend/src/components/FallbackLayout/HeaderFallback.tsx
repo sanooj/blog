@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./Header.module.scss";
+import styles from "./FallbackLayout.module.scss";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const HeaderFallback = () => {
   return (
     <div className={styles.header}>
       <div className={styles.empty}></div>
@@ -21,4 +21,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderFallback;

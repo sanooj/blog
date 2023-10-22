@@ -16,6 +16,7 @@ const useCreateBlogMutation = () => {
     mutationFn: (blog: Blog) => {
       return fetch(apiUrl, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

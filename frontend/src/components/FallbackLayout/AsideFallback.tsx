@@ -1,13 +1,12 @@
-import styles from "./Aside.module.scss";
-import photoJpg from "assets/images/pic.jpg";
-import photoWebp from "assets/images/pic.webp";
-import Badge from "components/shared/Badge/Badge";
-import * as Icon from "react-bootstrap-icons";
+import React from "react";
 
-const Aside = () => {
+import styles from "./FallbackLayout.module.scss";
+
+const AsideFallback = () => {
   return (
     <aside className={styles.aside}>
-      <picture>
+      ss
+      {/* <picture>
         <source srcSet={photoWebp} type='image/webp' />
         <img src={photoJpg} alt='Sanooj' />
       </picture>
@@ -62,14 +61,11 @@ const Aside = () => {
         </li>
       </ul>
 
-      <a
-        href={`${import.meta.env.VITE_API_PUBLIC_URL}/files/sanooj-frontend-developer.pdf`}
-        className={styles["download-cv"]}
-        download>
+      <a href='' className={styles["download-cv"]} download>
         <Icon.Download /> Download CV
-      </a>
+      </a> */}
     </aside>
   );
 };
 
-export default Aside;
+export default AsideFallback;

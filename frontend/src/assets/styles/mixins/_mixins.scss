@@ -1,4 +1,30 @@
 @mixin font-size($sizeValue: 16) {
-  font-size: ($sizeValue) + px;
-  font-size: ($sizeValue / 10) + rem;
+  font-size: calc($sizeValue) + px;
+  font-size: calc($sizeValue / 10) + rem;
+}
+
+@mixin media-queries($breakpoint: "xs") {
+  $devices-width: 576px;
+
+  @if $breakpoint == "xl" {
+    $devices-width: 1200px;
+  } @else if $breakpoint == "lg" {
+    $devices-width: 992px;
+  } @else if $breakpoint == "md" {
+    $devices-width: 768px;
+  } @else if $breakpoint == "sm" {
+    $devices-width: 576px;
+  } @else {
+    $devices-width: 576px;
+  }
+
+  @if $breakpoint == "xs" {
+    @media (width < $devices-width) {
+      @content;
+    }
+  } @else {
+    @media (width >= $devices-width) {
+      @content;
+    }
+  }
 }

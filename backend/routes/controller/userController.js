@@ -55,6 +55,12 @@ const signin = async (req, res, next) => {
       },
     );
 
+    // removing cookie if user already logged in
+    res.clearCookie(`${existingUser.id}`);
+    if (req?.cookies[`${existingUser.id}`]) {
+      req.cookies[`${existingUser.id}`] = "";
+    }
+
     res.cookie(existingUser.id, token, {
       path: "/",
       expires: new Date(Date.now() + 1000 * 60 * 60),
@@ -101,8 +107,9 @@ const refreshToken = (req, res) => {
       res.status(403).send({ message: "You are not authorized" });
       return;
     }
+
     res.clearCookie(`${payload.id}`);
-    req.cookie[`${payload.id}`] = "";
+    req.headers.cookie[`${payload.id}`] = "";
 
     const token = JWT.sign({ email: payload.email, id: payload.id }, process.env.JWT_SECRET_KEY, {
       expiresIn: "65m",

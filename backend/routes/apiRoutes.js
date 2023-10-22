@@ -1,5 +1,12 @@
 import express from "express";
-import { signup, signin, verifyToken, refreshToken, getUser } from "./controller/userController.js";
+import {
+  signup,
+  signin,
+  verifyToken,
+  refreshToken,
+  getUser,
+  signOut,
+} from "./controller/userController.js";
 import {
   createBlog,
   updateBlog,
@@ -19,6 +26,9 @@ router.post("/signup", signup);
 
 // signin API
 router.post("/signin", signin);
+
+// signin API
+router.post("/signout", signOut);
 
 // create API Data
 router.post("/create-blogs", verifyToken, createBlog);

@@ -93,8 +93,13 @@ const verifyToken = (req, res, next) => {
   });
 };
 
-const refreshToken = (req, res) => {
+const refreshToken = (req, res, next) => {
   const { cookie } = req.headers;
+
+  if (!cookie) {
+    res.status(400).send({ message: "You are not authorized" });
+    return;
+  }
   const previousToken = cookie.split("=")[1];
 
   if (!previousToken) {
@@ -108,8 +113,9 @@ const refreshToken = (req, res) => {
       return;
     }
 
+    console.log(req.cookies);
     res.clearCookie(`${payload.id}`);
-    req.headers.cookie[`${payload.id}`] = "";
+    req.cookies[`${payload.id}`] = "";
 
     const token = JWT.sign({ email: payload.email, id: payload.id }, process.env.JWT_SECRET_KEY, {
       expiresIn: "65m",
@@ -123,6 +129,31 @@ const refreshToken = (req, res) => {
     });
     req.payload = payload;
     next();
+  });
+};
+
+const signOut = (req, res) => {
+  const { cookie } = req.headers;
+  if (!cookie) {
+    res.status(401).send({ message: "Couldn't sign out" });
+    return;
+  }
+  const token = cookie.split("=")[1];
+  if (!token) {
+    res.status(401).send({ message: "Couldn't sign out" });
+    return;
+  }
+
+  JWT.verify(token, process.env.JWT_SECRET_KEY, (error, payload) => {
+    if (error) {
+      res.status(401).send({ message: "Authentication failed" });
+      return;
+    }
+
+    res.clearCookie(`${payload?.id}`);
+    req.cookies[`${payload?.id}`] = "";
+
+    res.status(200).send({ message: "Signed out successfully" });
   });
 };
 
@@ -141,4 +172,4 @@ const getUser = async (req, res, next) => {
   }
 };
 
-export { signup, signin, verifyToken, getUser, refreshToken };
+export { signup, signin, verifyToken, getUser, refreshToken, signOut };

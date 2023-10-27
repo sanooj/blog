@@ -9,9 +9,13 @@ const signup = async (req, res, next) => {
 
   try {
     const existingUser = await User.findOne({ email });
+    const isAdmin = await User.findOne({ isAdmin });
     if (existingUser) {
-      res.status(400).send({ message: "User already exists" });
-      return;
+      return res.status(400).send({ message: "User already exists" });
+    }
+
+    if (isAdmin) {
+      return res.status(400).send({ message: "Only one admin allowed" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -31,31 +35,28 @@ const signup = async (req, res, next) => {
 };
 
 // signin API
-const signin = async (req, res, next) => {
+const signin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
     const existingUser = await User.findOne({ email });
     if (!existingUser) {
-      res.status(404).send({ message: "User not found" });
-      return;
+      return res.status(404).send({ message: "User not found" });
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
     if (!isPasswordCorrect) {
-      res.status(400).send({ message: "Invalid credentials" });
-      return;
+      return res.status(400).send({ message: "Invalid credentials" });
     }
 
     const token = JWT.sign(
-      { email: existingUser.email, id: existingUser._id },
+      { email: existingUser.email, id: existingUser._id, isAdmin: existingUser.isAdmin },
       process.env.JWT_SECRET_KEY,
       {
         expiresIn: "65m",
       },
     );
 
-    // removing cookie if user already logged in
     res.clearCookie(`${existingUser.id}`);
     if (req?.cookies[`${existingUser.id}`]) {
       req.cookies[`${existingUser.id}`] = "";
@@ -68,14 +69,15 @@ const signin = async (req, res, next) => {
       sameSite: "lax",
     });
 
-    res.status(200).send({ message: "User logged in Successfully", user: existingUser });
+    return res.status(200).send({ message: "User logged in Successfully", user: existingUser });
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    return res.status(500).send({ message: error.message });
   }
 };
 
 const verifyToken = (req, res, next) => {
   const { cookie } = req.headers;
+
   if (!cookie) {
     res.status(401).send({ message: "You are not authorized" });
     return;
@@ -113,13 +115,16 @@ const refreshToken = (req, res, next) => {
       return;
     }
 
-    console.log(req.cookies);
     res.clearCookie(`${payload.id}`);
     req.cookies[`${payload.id}`] = "";
 
-    const token = JWT.sign({ email: payload.email, id: payload.id }, process.env.JWT_SECRET_KEY, {
-      expiresIn: "65m",
-    });
+    const token = JWT.sign(
+      { email: payload.email, id: payload.id, isAdmin: payload.isAdmin },
+      process.env.JWT_SECRET_KEY,
+      {
+        expiresIn: "65m",
+      },
+    );
 
     res.cookie(payload.id, token, {
       path: "/",

@@ -1,0 +1,22 @@
+@use "./../../assets/styles/use.scss";
+
+.about-container {
+  @include use.font-size(12);
+  ul {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    margin-bottom: 20px;
+
+    li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      &::before {
+        content: "•";
+        color: use.$text-heading;
+        display: inline-block;
+        width: 1em;
+      }
+    }
+  }
+}

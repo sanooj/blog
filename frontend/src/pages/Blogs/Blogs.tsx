@@ -1,7 +1,7 @@
 import useGetBlogsDataQuery from "../../api/dataFetchingHooks/queries/useGetBlogsDataQuery";
 
 const Blogs = () => {
-  const { data, isLoading, error, isLoadingError, isError } = useGetBlogsDataQuery();
+  const { data, isLoading } = useGetBlogsDataQuery();
 
   return (
     <div>

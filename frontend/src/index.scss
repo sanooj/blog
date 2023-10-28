@@ -8,6 +8,9 @@
   --body-font-size: 1.5rem;
   --body-line-height: 1.65rem;
   --body-font-weight: 400;
+
+  --progress-bg: rgba(68, 86, 108, 0.1);
+  --progress-bar-bg: #0a66c2;
 }
 
 html {
@@ -32,5 +35,37 @@ body {
     z-index: -1;
     background: url(./assets/images/body-bg.png) no-repeat center center fixed;
     background-size: 120% 120%;
+  }
+}
+
+.progress {
+  background-color: var(--progress-bg);
+  border-radius: 20px;
+  display: flex;
+  font-size: 12px;
+  font-size: 1.2rem;
+  height: 20px;
+  overflow: hidden;
+
+  &-bar {
+    background-color: var(--progress-bar-bg);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 5px;
+  }
+
+  &-bar-wrapper {
+    position: relative;
+    color: #f0f0f6;
+    font-size: 12px;
+    font-size: 1.2rem;
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 8px;
+      transform: translateY(-50%);
+    }
   }
 }

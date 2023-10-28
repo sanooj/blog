@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { QueryKeys } from "../../queryKeys";
-import { IBlogAPIResponse } from "interfaces/apiInterfaces";
+import { IExperienceAPIResponse } from "interfaces/apiInterfaces";
 import axios from "axios";
 
-const useGetBlogsDataQuery = (): IBlogAPIResponse => {
-  const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/blogs`;
+const useGetExperienceDataQuery = (): IExperienceAPIResponse => {
+  const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/experience`;
 
   const { data, isLoading, error, isLoadingError, isError } = useQuery({
-    queryKey: [QueryKeys.Blogs],
+    queryKey: [QueryKeys.Experience],
     queryFn: async () => {
       try {
         const { data } = await axios.get(apiUrl);
@@ -18,6 +18,6 @@ const useGetBlogsDataQuery = (): IBlogAPIResponse => {
     },
   });
 
-  return { data, error, isLoading, isLoadingError, isError };
+  return { data: data?.data, error, isLoading, isLoadingError, isError };
 };
-export default useGetBlogsDataQuery;
+export default useGetExperienceDataQuery;

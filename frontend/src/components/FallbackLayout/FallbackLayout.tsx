@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./FallbackLayout.module.scss";
 import HeaderFallback from "./HeaderFallback";
 import AsideFallback from "./AsideFallback";

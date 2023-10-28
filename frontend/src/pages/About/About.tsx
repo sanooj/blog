@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./About.module.scss";
 import useGetProfileDataQuery from "api/dataFetchingHooks/queries/useGetProfileDataQuery";
 /**

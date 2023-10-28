@@ -1,5 +1,3 @@
-import React from "react";
-
 const BlogById = () => {
   return <div>ShowBlogById</div>;
 };

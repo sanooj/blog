@@ -1,5 +1,5 @@
 import styles from "./Header.module.scss";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -7,14 +7,18 @@ const Header = () => {
       <div className={styles.empty}></div>
       <ul className={styles.nav}>
         <li>
-          <Link to='/about'>About</Link>
+          <NavLink to='/about' className={({ isActive }) => (isActive ? styles.active : "")}>
+            About
+          </NavLink>
         </li>
         <li>
-          <Link to='/resume'>Resume</Link>
+          <NavLink to='/resume' className={({ isActive }) => (isActive ? styles.active : "")}>
+            Resume
+          </NavLink>
         </li>
-        <li>
+        {/* <li>
           <Link to='/blogs'>Blogs</Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

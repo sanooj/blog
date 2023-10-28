@@ -8,7 +8,7 @@ const FallbackLayout = () => {
       <div className={styles["section-wrapper"]}>
         <HeaderFallback />
         <AsideFallback />
-        <div className={styles.content}></div>
+        <div className={styles.content}>...Loading</div>
       </div>
     </main>
   );

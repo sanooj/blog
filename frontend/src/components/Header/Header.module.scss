@@ -44,8 +44,9 @@
     text-transform: uppercase;
     text-decoration: none;
 
-    &:hover {
-      background-color: #304cfd;
+    &:hover,
+    &.active {
+      background-color: use.$link-color;
       border-radius: 10px;
       color: #fff;
     }

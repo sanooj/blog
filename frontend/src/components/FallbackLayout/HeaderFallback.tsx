@@ -12,9 +12,9 @@ const HeaderFallback = () => {
         <li>
           <Link to='/resume'>Resume</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to='/blogs'>Blogs</Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   );
